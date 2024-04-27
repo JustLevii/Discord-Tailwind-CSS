@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Profile Tailwind CSS</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-800 text-white">
+  <div class="container mx-auto p-40">
+    <!-- Profile card -->
+    <div class="bg-black rounded-lg overflow-hidden shadow-lg max-w-sm relative">
+      <!-- Cover image -->
+      <div id="coverImage" class="bg-cover bg-center h-32 w-full" style="background-image: url('https://i.pinimg.com/564x/4d/5c/73/4d5c73641497270dc2ab0d9ce1645bae.jpg');"></div>
+
+      <!-- Profile image -->
+      <div class="-mt-12 ml-4 absolute">
+        <img id="profileImage" class="rounded-full object-cover h-24 w-24" src="https://i.pinimg.com/564x/4d/5c/73/4d5c73641497270dc2ab0d9ce1645bae.jpg" alt="profile picture">
+      </div>
+
+      <!-- Rest of the profile content should start here due to the absolute positioning of profile image -->
+      <div class="pt-16"> <!-- This padding-top value might need adjustment -->
+        <!-- Username and status -->
+            <!-- Rozetler -->
+    <div class="px-4 pt-2 pb-4">
+        <div class="flex space-x-1">
+          <img src="https://cdn3.emoji.gg/emojis/9020-hypersquad.png" class="w-4 h-4" alt="Rozet">
+          <img src="https://cdn3.emoji.gg/emojis/9595-badge-bughunter.png" class="w-4 h-4" alt="Rozet">
+          <img src="https://cdn3.emoji.gg/emojis/9765-badge-moderators.png" class="w-4 h-4" alt="Rozet">
+          <img src="https://cdn3.emoji.gg/emojis/3199-badge-owner.png" class="w-4 h-4" alt="Rozet">
+          <img src="https://cdn3.emoji.gg/emojis/1798-early-verified-bot-developer.png" class="w-4 h-4" alt="Rozet">
+          <img src="https://cdn3.emoji.gg/emojis/4269-discord-staff.png" class="w-4 h-4" alt="Rozet">
+          <img src="https://cdn3.emoji.gg/emojis/2428-early-supporter.gif" class="w-4 h-4" alt="Rozet">
+        </div>
+      </div>
+
+        <div class="px-4 pb-4">
+          <div class="font-bold text-lg">uyuyorum {um}</div>
+          <div class="text-purple-400">The status goes here</div>
+        </div>
+        <!-- Links -->
+        <div class="px-4 pb-4">
+          <div class="flex flex-col">
+            <a href="https://github.com/yourusername" class="mb-2">GitHub</a>
+            <a href="https://yoursite.com" class="mb-2">Website</a>
+            <a href="https://discord.gg/yourserver" class="mb-2">Discord</a>
+            <!-- Add more links as needed -->
+          </div>
+        </div>
+        <!-- Footer with custom button -->
+        <div class="bg-black p-3 text-center">
+          <button id="fetchCharacter" class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded">
+           getir lan random anime resmi
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-black rounded-lg overflow-hidden shadow-lg max-w-sm p-4">
+        <div class="mb-4">
+          <input type="text" id="profileImageInput" name="input2" class="bg-gray-700 text-white rounded border border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block w-full p-2.5" placeholder="Profile Image">
+        </div>
+        <div class="mb-4">
+          <input type="text" id="coverImageInput" name="input1" class="bg-gray-700 text-white rounded border border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 block w-full p-2.5" placeholder="Banner">
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+  <script>
+    // DOMContentLoaded event'ini dinle
+    document.addEventListener('DOMContentLoaded', () => {
+      // Cover image input ve image element
+      const coverImageInput = document.getElementById('coverImageInput');
+      const coverImage = document.getElementById('coverImage');
+
+      // Profile image input ve image element
+      const profileImageInput = document.getElementById('profileImageInput');
+      const profileImage = document.getElementById('profileImage');
+
+      // Cover image input için event listener
+      if(coverImageInput && coverImage) {
+        coverImageInput.addEventListener('input', function() {
+          coverImage.style.backgroundImage = `url('${coverImageInput.value}')`;
+        });
+      }
+
+      // Profile image input için event listener
+      if(profileImageInput && profileImage) {
+        profileImageInput.addEventListener('input', function() {
+          profileImage.src = profileImageInput.value;
+        });
+      }
+    });
+
+    function fetchCharacter() {
+      fetch('https://api.jikan.moe/v4/random/characters')
+        .then(response => response.json())
+        .then(data => {
+          const character = data.data;
+        //   document.getElementById('characterName').textContent = character.name;
+          document.getElementById('profileImage').src = character.images.jpg.image_url;
+        })
+        .catch(error => console.error('Hata:', error));
+    }
+
+    document.getElementById('fetchCharacter').addEventListener('click', fetchCharacter);
+
+  </script>
+
+</body>
+</html>
